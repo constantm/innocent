@@ -2,8 +2,8 @@ jQuery(function($) {
 
     $.stellar({
         horizontalScrolling: false,
-        verticalScrolling: true,
-        responsive: true
+        verticalScrolling: true
+        // responsive: true
     });
 
     /* ==========================================================================
