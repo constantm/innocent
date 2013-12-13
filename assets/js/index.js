@@ -1,37 +1,39 @@
 jQuery(function($) {
 
-	/* ==========================================================================
+    $.stellar();
+
+    /* ==========================================================================
 	   Exponential Widths & Fonts
 	   ========================================================================== */
-	   
-		function exponential() {
-			var view = $(window).width();
-			var shot = Math.sqrt(view);
-			var type = shot / 10 - 0.5;
-			shot = 100 - shot * view / 1000;
-			if(shot < 37.51) {
-				shot = 37.50;
-			} else if (shot > 89.999) {
-				shot = 90;
-			}
-			$('.inner').css('width', shot + '%');
-			if(type < 1.41) {
-				type = 1.4;
-			} else if (type > 1.999) {
-				type = 2;
-			}
-			$('body').css('font-size', type + 'em');
-		}
-		exponential();
-		$(window).resize(exponential);
 
-	/* ==========================================================================
+    function exponential() {
+        var view = $(window).width();
+        var shot = Math.sqrt(view);
+        var type = shot / 10 - 0.5;
+        shot = 100 - shot * view / 1000;
+        if (shot < 37.51) {
+            shot = 37.50;
+        } else if (shot > 89.999) {
+            shot = 90;
+        }
+        $('.inner').css('width', shot + '%');
+        if (type < 1.41) {
+            type = 1.4;
+        } else if (type > 1.999) {
+            type = 2;
+        }
+        $('body').css('font-size', type + 'em');
+    }
+    exponential();
+    $(window).resize(exponential);
+
+    /* ==========================================================================
 	   Fitvids by Chris Coyier
 	   ========================================================================== */
 
-	$('#wrapper').fitVids();
+    $('#wrapper').fitVids();
 
-	/* ==========================================================================
+    /* ==========================================================================
 	   Ajax Loading based on Ghostwriter by Rory Gibson - https://github.com/roryg/ghostwriter
 	   ========================================================================== */
 
@@ -52,7 +54,7 @@ jQuery(function($) {
     }
 
     // Check if history is enabled for the browser
-    if ( ! History.enabled) {
+    if (!History.enabled) {
         return false;
     }
 
@@ -65,20 +67,20 @@ jQuery(function($) {
             var $html = $(result);
             var $newContent = $('#ajax-container', $html).contents();
 
-            $('html, body').animate({'scrollTop': 0});
+            $('html, body').animate({
+                'scrollTop': 0
+            });
 
             $ajaxContainer.fadeOut(500, function() {
                 $postIndex = $newContent.filter('#post-index');
 
-                if (showIndex === true) {
-                } else {
-                }
+                if (showIndex === true) {} else {}
 
                 $ajaxContainer.html($newContent);
                 $ajaxContainer.fadeIn(500);
-				
+
                 NProgress.done();
-				$('#site-footer').fadeIn(100);
+                $('#site-footer').fadeIn(100);
                 exponential();
                 $('#wrapper').fitVids();
 
@@ -89,7 +91,7 @@ jQuery(function($) {
     });
 
     $('body').on('click', '.js-ajax-link, .pagination a', function(e) {
-        e.preventDefault(); 
+        e.preventDefault();
 
         if (loading === false) {
             var currentState = History.getState();
@@ -107,21 +109,23 @@ jQuery(function($) {
                     showIndex = true;
                 }
                 if ($(this).hasClass('post-link')) {
-					$blogLink.addClass('single');
+                    $blogLink.addClass('single');
 
-				} else if($(this).hasClass('js-show-index')) {
-					if($(this).hasClass('single')) {}
-					$blogLink.removeClass('single');
+                } else if ($(this).hasClass('js-show-index')) {
+                    if ($(this).hasClass('single')) {}
+                    $blogLink.removeClass('single');
 
-				}
+                }
                 NProgress.start();
 
                 History.pushState({}, title, url);
             } else {
-            
+
                 // Swap in the latest post or post index as needed
                 if (!$(this).hasClass('js-show-index')) {
-                    $('html, body').animate({'scrollTop': 0});
+                    $('html, body').animate({
+                        'scrollTop': 0
+                    });
 
                     NProgress.start();
 
