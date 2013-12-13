@@ -1,6 +1,10 @@
 jQuery(function($) {
 
-    $.stellar();
+    $.stellar({
+        horizontalScrolling: false,
+        verticalScrolling: true,
+        responsive: true
+    });
 
     /* ==========================================================================
 	   Exponential Widths & Fonts
